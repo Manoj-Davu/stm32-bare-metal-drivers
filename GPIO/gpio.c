@@ -12,7 +12,6 @@
 
 #define RCC (*(volatile uint32_t*)0x40023830UL)
 
-#include <stdint.h>
 
 #define GPIO_INPUT 0
 #define GPIO_OUTPUT 1
@@ -28,29 +27,6 @@
 #define GPIOG_BASE 0x40021800UL
 #define GPIOH_BASE 0x40021c00UL
 
-
-typedef struct
-{
-volatile uint32_t  MODER;
-volatile uint32_t  OTYPER;
-volatile uint32_t  OSPEEDR;
-volatile uint32_t  PUPDR;
-volatile uint32_t  IDR;
-volatile uint32_t  ODR;
-volatile uint32_t  BSRR;
-volatile uint32_t  LCKR;
-volatile uint32_t  AFR[2];
-}gpio_reg_map;
-
-typedef struct
-{
-uint8_t pin;
-uint8_t Mode;
-uint8_t pull;
-uint8_t speed;
-uint8_t otype;
-uint8_t af;
-}GPIO_Config;
 
 
 
@@ -170,25 +146,4 @@ uint8_t GPIO_Read ( gpio_reg_map* gpiox , uint8_t pin )
 	return (gpiox->IDR & (1U << pin )) ? GPIO_PINHIGH : GPIO_PINLOW ;
 }
 
-/*void GPIO_SetPull ( gpio_reg_map* gpiox , uint8_t pin , uint8_t pull )
-{
 
-uint8_t bit =pin * 2 ;
-
-}*/
-
-/*void GPIO_SetOutput_Type ( gpio_reg_map* gpiox , uint8_t pin , uint8_t type )
-{
-
-}*/
-/*void GPIO_SetOutput_Speed ( gpio_reg_map* gpiox , uint8_t pin , uint8_t speed )
-{
-uint8_t bit = pin*2 ;
-}*/
-
-
-/*void GPIO_SetAF ( gpio_reg_map* gpiox , uint8_t pin , uint8_t af )
-{
-
-}
-*/
