@@ -124,10 +124,13 @@ gpiox->OSPEEDR |= (obj->speed << bit);
 
 void GPIO_Write ( gpio_reg_map* gpiox , uint8_t pin ,uint8_t state )
 {
+
+gpiox->ODR&=~(1U << pin);
+
 if ( state == GPIO_PINHIGH )
-	gpiox->BSRR=( 1U << pin );
+	gpiox->ODR|=(1U << pin );
 else
-	gpiox->BSRR=( 1U << (pin+16) );
+	gpiox->ODR&=~( 1U << pin);
 
 }
 
